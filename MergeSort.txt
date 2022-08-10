@@ -1,0 +1,127 @@
+//Compute Merge sort from sample code from fork repository
+import java.util.*;                 //import all java libraries
+
+// A class the will hold LinkedList object value
+
+public class MyLinkedList<E>
+{
+    private Node<E> head, tail;
+    
+    public void append(E item)
+    {
+        Node<E> newNode = new Node<>(item);
+        
+        if(head==null)
+        {
+            head=tail=null;
+        }
+        else
+        {
+            tail.next = newNode;
+            tail = newNode;
+        }
+    }
+    
+    public MyLinkedList()
+    {
+        head=tail=null;
+    }
+        
+    private static class Node<E>
+    {
+        E element;
+        Node<E> next;
+            
+        public Node(E element)
+        {
+            this.element= element;
+            next=null;
+        }
+    }
+        
+}
+    
+
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    MyLinkedList<Integer> list1 = new LinkedList<Integer>();
+	    MyLinkedList<Integer> list2 = new LinkedList<Integer>();
+	    MyLinkedList<Integer> list3 = new LinkedList<Integer>();
+	    
+	    //append the values as objects to LinkedList
+	    
+	    list1.append(new Integer(4));
+	    list1.append(new Integer(10));
+	    list1.append(new Integer(34));
+	    list2.append(new Integer(90));
+	    list2.append(new Integer(16));
+	    list2.append(new Integer(7));
+	    list3 = list1.merge(list2);
+	    
+	    System.out.println("List1 "+ list1);
+	    System.out.println("List2 "+ list2);
+	    System.out.println("List1 "+ list3);
+	}
+	
+	//fibonacci method to find the value with its index 
+	public static MyLinkedList merge(MyLinkedList list2)
+	{
+	    MyLinkedList returnList = new LinkedList();
+	    Node<E> ptrCurrent,ptrParammeter;                   //declaring two pointers to traverse both list 
+	    ptrCurrent=head;
+	    ptrParammeter= list2.head;
+	    
+	    if(head==null)                                  //calling list is empty
+	    {
+	        while(ptrParammeter!=null)
+	        {
+	            returnList.append(ptrParammeter.element);
+	            ptrParammeter=ptrParammeter.next;
+	        }
+	        return returnList;
+	    }
+	    if(ptrParammeter==null)                         //parameter list is empty
+	    {
+	        while(ptrCurrent!=null)
+	        {
+	            returnList.append(ptrCurrent.element);
+	            ptrParammeter=ptrCurrent.next;
+	        }
+	        return returnList;
+	    }
+	    
+	    while(ptrCurrent!=null && ptrParammeter!=null) //continue up until the end of the list
+	    {
+	        if(ptrCurrent.element<ptrParammeter.element)
+	        {
+	            returnList.append(ptrCurrent.element);
+	            ptrCurrent = ptrCurrent.next;
+	        }
+	        else
+	        {
+	            returnList.append(ptrParammeter.element);
+	            ptrParammeter = ptrParammeter.next;
+	        }
+	    }
+	    
+	    if(ptrCurrent==null)                                //copy the rest of the parameter list
+	    {
+	        while(ptrParammeter!=null)
+	        {
+	            returnList.append(ptrParammeter.element);
+	            ptrParammeter=ptrParammeter.next;
+	        }
+	    }
+	    if(ptrParammeter==null)                             //copy the rest of the calling list
+	    {
+	        while(ptrCurrent!=null)
+	        {
+	            returnList.append(ptrCurrent.element);
+	            ptrParammeter=ptrCurrent.next;
+	        }
+	    }
+	    return returnList;
+	}
+}
