@@ -5,9 +5,9 @@ public class Main
 {
 	public static void main(String[] args) 
 	{
-	    Scanner input = new Scanner(System.in);           //objects that will be used to get user input
+	    Scanner input = new Scanner(System.in);           //object that will be used to get user input
 		int n;                                          //declaring n to hold index of the value in fibonacci series
-		System.out.println("Enter nonnegetive number to find its factorial: ");
+		System.out.println("Enter index number(nonnegative) to find its value: ");
 		n= input.nextInt();
 		System.out.println("Value at index " + n + " is: " + Fib(n));
 		input.close();
